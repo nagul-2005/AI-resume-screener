@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analysis Result</title>
+</head>
+<body>
+
+    <h1>📊 Resume Analysis Result</h1>
+
+    <!-- Match Score -->
+    <div>
+        <h2>Match Score</h2>
+        <h1>{{ screen.match_score }}%</h1>
+
+        {% if screen.match_score >= 80 %}
+            <p style="color:green;">🟢 Excellent Match!</p>
+        {% elif screen.match_score >= 60 %}
+            <p style="color:orange;">🟡 Good Match</p>
+        {% else %}
+            <p style="color:red;">🔴 Needs Improvement</p>
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <!-- Strengths -->
+    <div>
+        <h2>✅ Strengths</h2>
+        <ul>
+        {% for strength in strengths %}
+            <li>{{ strength }}</li>
+        {% empty %}
+            <li>No strengths found</li>
+        {% endfor %}
+        </ul>
+    </div>
+
+    <hr>
+
+    <!-- Missing Skills -->
+    <div>
+        <h2>❌ Missing Skills</h2>
+        <ul>
+        {% for skill in missing_skills %}
+            <li>{{ skill }}</li>
+        {% empty %}
+            <li>No missing skills found</li>
+        {% endfor %}
+        </ul>
+    </div>
+
+    <hr>
+
+    <!-- Suggestions -->
+    <div>
+        <h2>💡 Suggestions</h2>
+        <ul>
+        {% for suggestion in suggestions %}
+            <li>{{ suggestion }}</li>
+        {% empty %}
+            <li>No suggestions found</li>
+        {% endfor %}
+        </ul>
+    </div>
+
+    <hr>
+
+    <a href="/">← Analyze Another Resume</a> | 
+    <a href="/history/">View History</a>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scan History</title>
+</head>
+<body>
+
+    <h1>📋 Your Scan History</h1>
+    <a href="/">← New Scan</a>
+    <hr>
+
+    {% for screen in screens %}
+        <div>
+            <h3>Scan # {{ forloop.counter }}</h3>
+            <p>Match Score: <strong>{{ screen.match_score }}%</strong></p>
+            <p>Date: {{ screen.created_at }}</p>
+            <a href="/result/{{ screen.pk }}/">View Details</a>
+        </div>
+        <hr>
+    {% empty %}
+        <p>No scans yet. <a href="/">Analyze your first resume!</a></p>
+    {% endfor %}
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Screener</title>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        {% if request.user.is_authenticated %}
+            <p>Welcome, {{ request.user.username }}! 
+            <a href="/history/">My History</a> | 
+            <a href="/logout/">Logout</a></p>
+        {% else %}
+            <a href="/login/">Login</a> | 
+            <a href="/signup/">Signup</a>
+        {% endif %}
+    </nav>
+
+    <h1>🎯 AI Resume Screener</h1>
+    <p>Upload your resume and paste the job description and let me deal it !!</p>
+
+    <!-- Upload Form -->
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label>Upload Resume (PDF only):</label><br>
+        {{ form.resume }}<br><br>
+
+        <label>Paste Job Description:</label><br>
+        {{ form.job_description }}<br><br>
+
+        <button type="submit">Analyze Resume 🚀</button>
+    </form>
+
+</body>
+</html>
