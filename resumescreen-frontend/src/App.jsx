@@ -4,11 +4,10 @@ import SignupPage from './pages/SignupPage';
 import HomePage from './pages/HomePage';
 import ResultPage from './pages/ResultPage';
 import HistoryPage from './pages/HistoryPage';
-import { Children } from "react";
 
 const PrivateRoute = ({ children }) => {
     const token = localStorage.getItem('access_token');
-    return token ? children : <Navigate to='/login'/>;
+    return token ? children : <Navigate to="/login" replace />;
 };
 
 function App() {
@@ -16,7 +15,7 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/signup" element={<LoginPage/>} />
+                <Route path="/signup" element={<SignupPage/>} />
                 <Route path="/" element={
                     <PrivateRoute>
                         <HomePage />
