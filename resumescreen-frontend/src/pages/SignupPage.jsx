@@ -19,6 +19,12 @@ function SignupPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (formData.username.includes(' ')) {
+        setError('Username cannot contain spaces!')
+        return
+        }
+        
         if (formData.password !== formData.confirmPassword) {
             setError('Passwords do not match!');
             return;

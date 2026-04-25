@@ -17,34 +17,40 @@ def get_tokens_for_user(user):
         'access': str(refresh.access_token),
     }
 
-@api_view(['GET','POST'])
+@api_view(['GET', 'POST'])
 @permission_classes([AllowAny])
 def signup_view(request):
     if request.method == 'GET':
-         
-        username = request.data.get('username')
-        email = request.data.get('email')
-        password = request.data.get('password')
+        return Response({'message': 'Signup API working ✅'})
 
-        if User.objects.filter(username=username).exists():
-            return Response(
-             {'error': 'Username is already exists'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-    
-        user = User.objects.create_user(
-            username=username,
-            email=email,
-            password=password
+    username = request.data.get('username', '').strip()
+    email = request.data.get('email', '').strip()
+    password = request.data.get('password', '').strip()
+
+    # ← add this validation
+    if not username or not password:
+        return Response(
+            {'error': 'Username and password are required'},
+            status=status.HTTP_400_BAD_REQUEST
         )
 
-        tokens = get_tokens_for_user(user)
-        return Response({
-            'message': 'Account created successfully',
-            'tokens': tokens,
-            'username': user.username
-        },status=status.HTTP_201_CREATED)
+    if User.objects.filter(username=username).exists():
+        return Response(
+            {'error': 'Username already exists'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
+    user = User.objects.create_user(
+        username=username,
+        email=email,
+        password=password
+    )
+    tokens = get_tokens_for_user(user)
+    return Response({
+        'message': 'Account created successfully',
+        'tokens': tokens,
+        'username': user.username
+    }, status=status.HTTP_201_CREATED)
 @api_view(['GET','POST'])
 @permission_classes([AllowAny])
 def login_view(request):
