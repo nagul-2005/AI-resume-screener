@@ -52,7 +52,8 @@ INSTALLED_APPS = [
 # ── CORS Settings ──
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'https://resume-screener-frontend.vercel.app', # React dev server
+    'https://resume-screener-frontend.vercel.app',
+    'https://resume-screener-frontend-alpha.vercel.app',# React dev server
 ]
 
 # ── REST Framework Settings ──
